@@ -21,7 +21,9 @@ export default function QrCode({ navigation }) {
   async function getMacAddress() {
     await Network.getMacAddressAsync().then(mac => {
       Alert.alert(`Seu número é: ${mac}`);
-    })
+    }).catch(error => (
+      alert(error)
+    ))
   }
 
   useEffect(() => {
@@ -37,7 +39,8 @@ export default function QrCode({ navigation }) {
     if (data == 'getmacaddress') //se o que estiver no conteudo for igual ao macaddress que capturamos
       getMacAddress();
     else
-      Alert.alert('QrCode Inválido');
+      getMacAddress()
+      // Alert.alert('QrCode Inválido');
   };
   return (
     <View style={styles.container}>
